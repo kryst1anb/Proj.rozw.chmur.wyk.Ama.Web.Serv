@@ -76,3 +76,11 @@ body {
   left: 16px;
   font-size: 15px;
 }
+
+#file {
+  display: none;
+}
+
+label:hover {
+  background: rgba(50, 50, 50, 0.3);
+}
