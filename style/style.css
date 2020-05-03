@@ -84,3 +84,28 @@ body {
 label:hover {
   background: rgba(50, 50, 50, 0.3);
 }
+
+#photo {
+  width: 520px;
+  /* height: 350px; */
+  background-size: 100%;
+  background-repeat: no-repeat;
+  /* background-image: url("drive_resized.jpg"); */
+  display: flex;
+  margin: auto;
+}
+
+.canvas-photo {
+  visibility: hidden;
+  width: 35%;
+  height: 350px;
+  padding: 20px;
+  /* border: 1px solid rgba(50, 50, 50, 0.2); */
+  background-color: rgba(50, 50, 50, 0.2);
+  margin: auto;
+  margin-top: 1%;
+}
+
+.whole-contener {
+  margin-bottom: 50px;
+}
