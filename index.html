@@ -8,7 +8,7 @@
   <body>
     <canvas id="photo"></canvas><br />
     <input id="file" type="file" />
-    <img id="options" src="settings.png" />
+    <img class="options" src="settings.png" />
     <div class="sidebar" style="display: none;" id="menuToggle">
       <form>
         <input
@@ -128,8 +128,37 @@
     <p id="demo"></p>
     <div id="test"></div>
     <script>
-      $("#options").click(function () {
-        $(".sidebar").toggle("slow");
+      // $("#options").click(function () {
+      //   $(".sidebar").toggle("slow");
+      // });
+
+      // $(document).click(function () {
+      //   $(".sidebar").hide();
+      // });
+      $(document).ready(function () {
+        $(".options").click(function (e) {
+          e.stopPropagation();
+          if ($(this).hasClass("active")) {
+            $(".sidebar").toggle("slow");
+            $(this).removeClass("active");
+          } else {
+            $(".sidebar").delay(300).toggle("slow");
+            $(this).addClass("active");
+          }
+        });
+
+        function closeMenu() {
+          $(".sidebar").toggle("slow");
+          $(".options").removeClass("active");
+        }
+
+        $(document.body).click(function (e) {
+          closeMenu();
+        });
+
+        $(".sidebar").click(function (e) {
+          e.stopPropagation();
+        });
       });
     </script>
     <script src="script.js"></script>

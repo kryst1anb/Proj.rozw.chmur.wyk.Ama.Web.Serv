@@ -14,9 +14,10 @@ function tableCheck() {
     }
   }
 }
-
+var fileName = "";
 document.getElementById("file").addEventListener("change", function (e) {
   var file = this.files[0];
+  fileName = file.name;
   var xhr = new XMLHttpRequest();
   //console.log(e);
   xhr.addEventListener("load", function (e) {
@@ -27,6 +28,10 @@ document.getElementById("file").addEventListener("change", function (e) {
   data.append("file", file);
   document.getElementById("photo").style.backgroundImage =
     "url(" + file.name + ")";
+
+  file = fileName.replace(/\.[^/.]+$/, "");
+  fileNameJSON = file + ".json";
+
   getJSON();
   xhr.send(data);
 });
@@ -56,7 +61,7 @@ var randomColor = "";
 function generateColor() {
   randomColor = Math.floor(Math.random() * 16777215).toString(16);
   randomColor = "#" + randomColor;
-  console.log(randomColor);
+  //console.log(randomColor);
 }
 
 function drawRECT(widthtPhoto, heightPhoto) {
@@ -74,31 +79,19 @@ function drawRECT(widthtPhoto, heightPhoto) {
     ctx.lineWidth = "6";
     generateColor();
     ctx.strokeStyle = randomColor;
+
     var json = myArr["FaceDetails"][i]["BoundingBox"];
-    //console.log(ratioX);
+
     var ratioX = localStorage + ".ratioX" + i;
     var ratioY = localStorage + ".ratioY" + i;
     var ratioWidth = localStorage + ".ratioWidth" + i;
     var ratioHeight = localStorage + ".ratioHeight" + i;
 
-    //console.log(ratioX);
-
     ratioX = json["Left"];
     ratioY = json["Top"];
     ratioWidth = json["Width"];
     ratioHeight = json["Height"];
-    // console.log("imageHeight " + imageHeight);
-    // console.log("imageWidtht " + imageWidtht);
-    // console.log("ratioX: " + ratioX);
-    // console.log("ratioY: " + ratioY);
-    // console.log("ratioWidth: " + ratioWidth);
-    // console.log("ratioHeight: " + ratioHeight);
-    // console.log(
-    //   imageWidtht * ratioY,
-    //   imageHeight * ratioX,
-    //   imageWidtht * ratioWidth,
-    //   imageHeight * ratioHeight
-    // );
+
     ctx.rect(
       imageWidtht * ratioX,
       imageHeight * ratioY,
@@ -122,7 +115,7 @@ function getJSON() {
       //console.log(myArr);
     }
   };
-  xmlhttp.open("GET", "sample1.json", true);
+  xmlhttp.open("GET", fileNameJSON, true);
   xmlhttp.send();
 }
 
