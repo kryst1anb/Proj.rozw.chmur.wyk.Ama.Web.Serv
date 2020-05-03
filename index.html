@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link id="favicon" rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <canvas id="photo"></canvas><br />
+    <input id="file" type="file" />
+    <img id="options" src="settings.png" />
+    <div class="sidebar" style="display: none;" id="menuToggle">
+      <form>
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="1"
+          checked
+          onchange="tableCheck()"
+        />1<br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="2"
+          onchange="tableCheck()"
+        />2<br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="3"
+          onchange="tableCheck()"
+        />3<br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="4"
+          onchange="tableCheck()"
+        />4 <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="5"
+          onchange="tableCheck()"
+        />5<br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="6"
+          onchange="tableCheck()"
+        />6<br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="7"
+          onchange="tableCheck()"
+        />7<br />
+      </form>
+    </div>
+
+    <!-- STATIC TABLE TEST!-->
+    <table id="table">
+      <tr>
+        <th>Person 1</th>
+        <th>Person 2</th>
+        <th>Person 3</th>
+        <th>Person 4</th>
+        <th>Person 5</th>
+        <th>Person 6</th>
+      </tr>
+      <tr id="1">
+        <td>1</td>
+        <td>8</td>
+        <td>5</td>
+        <td>2</td>
+        <td>9</td>
+        <td>6</td>
+      </tr>
+      <tr id="2" style="display: none;">
+        <td>2</td>
+        <td>9</td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+        <td>7</td>
+      </tr>
+      <tr id="3" style="display: none;">
+        <td>3</td>
+        <td>0</td>
+        <td>7</td>
+        <td>4</td>
+        <td>1</td>
+        <td>8</td>
+      </tr>
+      <tr id="4" style="display: none;">
+        <td>4</td>
+        <td>1</td>
+        <td>8</td>
+        <td>5</td>
+        <td>2</td>
+        <td>9</td>
+      </tr>
+      <tr id="5" style="display: none;">
+        <td>5</td>
+        <td>2</td>
+        <td>9</td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+      </tr>
+      <tr id="6" style="display: none;">
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+        <td>7</td>
+        <td>4</td>
+        <td>1</td>
+      </tr>
+      <tr id="7" style="display: none;">
+        <td>7</td>
+        <td>4</td>
+        <td>1</td>
+        <td>8</td>
+        <td>5</td>
+        <td>2</td>
+      </tr>
+    </table>
+
+    <p id="demo"></p>
+    <div id="test"></div>
+    <script>
+      $("#options").click(function () {
+        $(".sidebar").toggle("slow");
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
