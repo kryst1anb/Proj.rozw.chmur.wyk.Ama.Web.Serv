@@ -1,7 +1,8 @@
 window.addEventListener("load", function () {
-  //onload
-  //jakiegoś pedała się tu doda jak będzie potrzeba np zerującego divy
+  //qweqweqwe
 });
+
+var myArr;
 
 function tableCheck() {
   var tableElement = document.forms[0];
@@ -14,33 +15,34 @@ function tableCheck() {
     }
   }
 }
-var fileName = "";
 document.getElementById("file").addEventListener("change", function (e) {
   var file = this.files[0];
-  fileName = file.name;
-  var xhr = new XMLHttpRequest();
+  var fileName = file.name;
+
+  var ajax = new XMLHttpRequest();
   //console.log(e);
-  xhr.addEventListener("load", function (e) {
-    //console.log("xhr upload complete", e, this.responseText);
-  });
-  xhr.open("post", "upload.php", true);
+  // ajax.addEventListener("load", function (e) {
+  //   //console.log("ajax upload complete", e, this.responseText);
+  // });
+  ajax.open("post", "upload.php", true);
   var data = new FormData();
   data.append("file", file);
   document.getElementById("photo").style.backgroundImage =
-    "url(" + file.name + ")";
+    "url(" + fileName + ")";
 
   file = fileName.replace(/\.[^/.]+$/, "");
   fileNameJSON = file + ".json";
 
   getJSON();
-  xhr.send(data);
+  ajax.send(data);
 });
 
-var x = document.getElementById("file");
-var _URL = window.URL || window.webkitURL;
-x.addEventListener("change", function (e) {
-  if (x) {
-    var file, img;
+document.getElementById("file").addEventListener("change", function (e) {
+  var _URL = "";
+  _URL = window.URL || window.webkitURL;
+  if (document.getElementById("file")) {
+    var file = "",
+      img = "";
 
     if ((file = this.files[0])) {
       img = new Image();
@@ -48,45 +50,50 @@ x.addEventListener("change", function (e) {
         //alert("width: " + this.width + " Height: " + this.height);
         document.getElementById("photo").width = this.width;
         document.getElementById("photo").height = this.height;
+
         drawRECT(this.width, this.height);
       };
       img.onerror = function () {
-        //alert("Not a valid file: " + file.name);
+        alert("Not a valid file: " + file.name);
       };
       img.src = _URL.createObjectURL(file);
     }
   }
 });
-var randomColor = "";
-
-function generateColor() {
-  var letters = "0123456789ABCDEF";
-  randomColor = "#";
-  for (var i = 0; i < 6; i++) {
-    randomColor += letters[Math.floor(Math.random() * 16)];
-  }
-}
 
 function drawRECT(widthtPhoto, heightPhoto) {
   localStorage.clear();
+  var i,
+    c = "",
+    ctx = "",
+    randomColor,
+    elementID;
   //IMAGE_WIDTH*LEFT_RATIO (X) , IMAGE_HEIGHT*TOP_RATIO (Y) , IMAGE_WIDTH*WIDTH_RATIO , IMAGE_HEIGHT*HEIGHT_RATIO
-  for (let i = 0; i < myArr["FaceDetails"].length; ++i) {
-    var c = document.getElementById("photo");
+  for (i = 0; i < myArr["FaceDetails"].length; ++i) {
+    c = document.getElementById("photo");
     imageHeight = heightPhoto;
     imageWidtht = widthtPhoto;
 
-    var ctx = ctx + i;
+    ctx = ctx + i;
 
-    var ctx = c.getContext("2d");
+    ctx = c.getContext("2d");
     ctx.beginPath();
     ctx.lineWidth = "6";
-    generateColor();
+
+    randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    console.log(randomColor.length);
+
+    if (randomColor.length < 7) {
+      randomColor += "f";
+    }
+
     ctx.strokeStyle = randomColor;
-    var elementID = "colName_" + i;
+    elementID = "colName_" + i;
+    console.log(elementID + ":" + randomColor);
+
     document.getElementById(elementID).style.backgroundColor = randomColor;
 
     var json = myArr["FaceDetails"][i]["BoundingBox"];
-
     var ratioX = localStorage + ".ratioX" + i;
     var ratioY = localStorage + ".ratioY" + i;
     var ratioWidth = localStorage + ".ratioWidth" + i;
@@ -108,11 +115,9 @@ function drawRECT(widthtPhoto, heightPhoto) {
   localStorage.clear();
 }
 
-var myArr;
-
 function getJSON() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
+  var ajax = new XMLHttpRequest();
+  ajax.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       myArr = JSON.parse(this.responseText);
       sendJSON();
@@ -120,8 +125,8 @@ function getJSON() {
       //console.log(myArr);
     }
   };
-  xmlhttp.open("GET", fileNameJSON, true);
-  xmlhttp.send();
+  ajax.open("GET", fileNameJSON, true);
+  ajax.send();
 }
 
 function sendJSON() {
