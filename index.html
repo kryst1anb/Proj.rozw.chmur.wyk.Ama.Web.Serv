@@ -14,151 +14,146 @@
         <input
           type="checkbox"
           name="optionCheckBox"
+          value="0"
+          checked
+          onchange="tableCheck()"
+        />Age Range
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
           value="1"
           checked
           onchange="tableCheck()"
-        />1<br />
+        />Smile
+        <br />
         <input
           type="checkbox"
           name="optionCheckBox"
           value="2"
+          checked
           onchange="tableCheck()"
-        />2<br />
+        />Eyeglasses
+        <br />
         <input
           type="checkbox"
           name="optionCheckBox"
           value="3"
+          checked
           onchange="tableCheck()"
-        />3<br />
+        />Sunglasses
+        <br />
         <input
           type="checkbox"
           name="optionCheckBox"
           value="4"
+          checked
           onchange="tableCheck()"
-        />4 <br />
+        />Gender
+        <br />
         <input
           type="checkbox"
           name="optionCheckBox"
           value="5"
+          checked
           onchange="tableCheck()"
-        />5<br />
+        />Beard
+        <br />
         <input
           type="checkbox"
           name="optionCheckBox"
           value="6"
+          checked
           onchange="tableCheck()"
-        />6<br />
+        />Mustache
+        <br />
         <input
           type="checkbox"
           name="optionCheckBox"
           value="7"
+          checked
           onchange="tableCheck()"
-        />7<br />
+        />Eyes Open
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="8"
+          checked
+          onchange="tableCheck()"
+        />Mouth Open
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="9"
+          checked
+          onchange="tableCheck()"
+        />Confidence
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="10"
+          onchange="tableCheck()"
+        />Happy
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="11"
+          onchange="tableCheck()"
+        />Calm
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="12"
+          onchange="tableCheck()"
+        />Sad
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="13"
+          onchange="tableCheck()"
+        />Surprised
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="14"
+          onchange="tableCheck()"
+        />Disguisted
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="15"
+          onchange="tableCheck()"
+        />Fear
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="16"
+          onchange="tableCheck()"
+        />Angry
+        <br />
+        <input
+          type="checkbox"
+          name="optionCheckBox"
+          value="17"
+          onchange="tableCheck()"
+        />Confused
+        <br />
       </form>
     </div>
-
-    <!-- STATIC TABLE TEST!-->
-    <table id="table">
-      <tr>
-        <th>Person 1</th>
-        <th>Person 2</th>
-        <th>Person 3</th>
-        <th>Person 4</th>
-        <th>Person 5</th>
-        <th>Person 6</th>
-      </tr>
-      <tr id="1">
-        <td>1</td>
-        <td>8</td>
-        <td>5</td>
-        <td>2</td>
-        <td>9</td>
-        <td>6</td>
-      </tr>
-      <tr id="2" style="display: none;">
-        <td>2</td>
-        <td>9</td>
-        <td>6</td>
-        <td>3</td>
-        <td>0</td>
-        <td>7</td>
-      </tr>
-      <tr id="3" style="display: none;">
-        <td>3</td>
-        <td>0</td>
-        <td>7</td>
-        <td>4</td>
-        <td>1</td>
-        <td>8</td>
-      </tr>
-      <tr id="4" style="display: none;">
-        <td>4</td>
-        <td>1</td>
-        <td>8</td>
-        <td>5</td>
-        <td>2</td>
-        <td>9</td>
-      </tr>
-      <tr id="5" style="display: none;">
-        <td>5</td>
-        <td>2</td>
-        <td>9</td>
-        <td>6</td>
-        <td>3</td>
-        <td>0</td>
-      </tr>
-      <tr id="6" style="display: none;">
-        <td>6</td>
-        <td>3</td>
-        <td>0</td>
-        <td>7</td>
-        <td>4</td>
-        <td>1</td>
-      </tr>
-      <tr id="7" style="display: none;">
-        <td>7</td>
-        <td>4</td>
-        <td>1</td>
-        <td>8</td>
-        <td>5</td>
-        <td>2</td>
-      </tr>
-    </table>
-
     <p id="demo"></p>
     <div id="test"></div>
     <script>
-      // $("#options").click(function () {
-      //   $(".sidebar").toggle("slow");
-      // });
-
-      // $(document).click(function () {
-      //   $(".sidebar").hide();
-      // });
-      $(document).ready(function () {
-        $(".options").click(function (e) {
-          e.stopPropagation();
-          if ($(this).hasClass("active")) {
-            $(".sidebar").toggle("slow");
-            $(this).removeClass("active");
-          } else {
-            $(".sidebar").delay(300).toggle("slow");
-            $(this).addClass("active");
-          }
-        });
-
-        function closeMenu() {
-          $(".sidebar").toggle("slow");
-          $(".options").removeClass("active");
-        }
-
-        $(document.body).click(function (e) {
-          closeMenu();
-        });
-
-        $(".sidebar").click(function (e) {
-          e.stopPropagation();
-        });
+      $(".options").click(function () {
+        $(".sidebar").toggle("slow");
       });
     </script>
     <script src="script.js"></script>

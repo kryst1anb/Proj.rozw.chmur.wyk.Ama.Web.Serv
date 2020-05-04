@@ -25,11 +25,11 @@ foreach ($dataJSON['json'] as $key => $value) {
 	$array = ['AgeRange','Smile','Eyeglasses','Sunglasses','Gender','Beard','Mustache','EyesOpen','MouthOpen','Confidence'];
 	$arrayEmotions = ['Happy','Calm','Sad','Surprised','Disguisted','Fear','Angry','Confused'];
 
-	echo "<table id='table1'>";
+	echo "<table id='table'>";
 	echo "<td>Name of Attribute</td>";
 	for($j=0;$j<$intcols;$j++) {
 		$id = $j +1;
-		echo "<td>Person ".$id."</td>";
+		echo "<td id='colName_".$j."'>Person ".$id."</td>";
 	}
 
 	for ($i = 0;$i<10;$i++) {
@@ -42,21 +42,21 @@ foreach ($dataJSON['json'] as $key => $value) {
 					echo "<td>".$chunk['AgeRange']['Low']."-".$chunk['AgeRange']['High']."</td>";
 				}
 				else if($chunk[$array[$i]] == $chunk['Confidence']){
-					echo "<td>". $chunk['Confidence']."</td>";
+					echo "<td>". round($chunk['Confidence'], 2)."%</td>";
 				}
 				else if($chunk[$array[$i]] != $chunk['AgeRange']){
-					echo "<td>".$chunk[$array[$i]]['Confidence']."</td>";
+					echo "<td>". round($chunk[$array[$i]]['Confidence'],2)."%</td>";
 				}
 			}
 		echo "</tr>";
 	}
 	for ($j = 0;$j<8;$j++) {
-
-		echo "<tr id='".$j."'>";
+		$rowNumber = $j+10;
+		echo "<tr id='".$rowNumber."' style='display:none;'>";
 		echo "<td>".$arrayEmotions[$j]."</td>";
 
 		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
-			echo "<td>".$chunk['Emotions'][$j]['Confidence']."</td>";
+			echo "<td>".round($chunk['Emotions'][$j]['Confidence'],2)."%</td>";
 		}
 	echo "</tr>";
 }

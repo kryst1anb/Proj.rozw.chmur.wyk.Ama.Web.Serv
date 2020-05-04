@@ -22,7 +22,7 @@ body {
 
 #menuToggle {
   color: white;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   background: rgba(0, 0, 0, 0.85);
   width: 250px;

@@ -61,7 +61,7 @@ var randomColor = "";
 function generateColor() {
   randomColor = Math.floor(Math.random() * 16777215).toString(16);
   randomColor = "#" + randomColor;
-  //console.log(randomColor);
+  console.log(randomColor);
 }
 
 function drawRECT(widthtPhoto, heightPhoto) {
@@ -78,6 +78,9 @@ function drawRECT(widthtPhoto, heightPhoto) {
     ctx.beginPath();
     ctx.lineWidth = "6";
     generateColor();
+
+    document.getElementById("colName_" + i).style.backgroundColor = randomColor;
+
     ctx.strokeStyle = randomColor;
 
     var json = myArr["FaceDetails"][i]["BoundingBox"];
@@ -112,7 +115,7 @@ function getJSON() {
       myArr = JSON.parse(this.responseText);
       sendJSON();
       //console.log("SEND..");
-      //console.log(myArr);
+      console.log(myArr);
     }
   };
   xmlhttp.open("GET", fileNameJSON, true);
