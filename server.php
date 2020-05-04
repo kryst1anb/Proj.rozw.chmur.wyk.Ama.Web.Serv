@@ -41,11 +41,24 @@ foreach ($dataJSON['json'] as $key => $value) {
 				if ($chunk[$array[$i]] == $chunk['AgeRange']){
 					echo "<td>".$chunk['AgeRange']['Low']."-".$chunk['AgeRange']['High']."</td>";
 				}
+				else if($chunk[$array[$i]] == $chunk['Gender']){
+					if($chunk['Gender']['Value'] == "Male"){
+						echo "<td>Male in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+					}
+					else {
+						echo "<td>Female in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+					}
+				}
 				else if($chunk[$array[$i]] == $chunk['Confidence']){
-					echo "<td>". round($chunk['Confidence'], 2)."%</td>";
+					echo "<td>" .round($chunk['Confidence'], 2)."%</td>";
 				}
 				else if($chunk[$array[$i]] != $chunk['AgeRange']){
-					echo "<td>". round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+					if($chunk[$array[$i]]['Value'] == 1){
+						echo "<td>Has in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+					}
+					else {
+						echo "<td>Has not in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+					}
 				}
 			}
 		echo "</tr>";

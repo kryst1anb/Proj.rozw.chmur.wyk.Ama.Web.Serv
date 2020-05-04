@@ -58,10 +58,13 @@ x.addEventListener("change", function (e) {
   }
 });
 var randomColor = "";
+
 function generateColor() {
-  randomColor = Math.floor(Math.random() * 16777215).toString(16);
-  randomColor = "#" + randomColor;
-  console.log(randomColor);
+  var letters = "0123456789ABCDEF";
+  randomColor = "#";
+  for (var i = 0; i < 6; i++) {
+    randomColor += letters[Math.floor(Math.random() * 16)];
+  }
 }
 
 function drawRECT(widthtPhoto, heightPhoto) {
@@ -78,10 +81,9 @@ function drawRECT(widthtPhoto, heightPhoto) {
     ctx.beginPath();
     ctx.lineWidth = "6";
     generateColor();
-
-    document.getElementById("colName_" + i).style.backgroundColor = randomColor;
-
     ctx.strokeStyle = randomColor;
+    var elementID = "colName_" + i;
+    document.getElementById(elementID).style.backgroundColor = randomColor;
 
     var json = myArr["FaceDetails"][i]["BoundingBox"];
 
@@ -115,7 +117,7 @@ function getJSON() {
       myArr = JSON.parse(this.responseText);
       sendJSON();
       //console.log("SEND..");
-      console.log(myArr);
+      //console.log(myArr);
     }
   };
   xmlhttp.open("GET", fileNameJSON, true);
