@@ -11,9 +11,6 @@ if($dataJSON == null) {
     $ok = false;
 }
 
-flock($f, LOCK_UN); 
-fclose($f);
-
 foreach($dataJSON['json']['FaceDetails'] as $chunk) {
 	unset($chunk["Landmarks"],$chunk["Pose"],$chunk["BoundingBox"]);
 }
@@ -26,10 +23,10 @@ foreach ($dataJSON['json'] as $key => $value) {
 	$arrayEmotions = ['Happy','Calm','Sad','Surprised','Disguisted','Fear','Angry','Confused'];
 
 	echo "<table id='table'>";
-	echo "<td>Name of Attribute</td>";
+	echo "<td class='first-line-tab'>Name of Attribute</td>";
 	for($j=0;$j<$intcols;$j++) {
 		$id = $j +1;
-		echo "<td id='colName_".$j."'>Person ".$id."</td>";
+		echo "<td class='first-line-tab' id='colName_".$j."'>Person ".$id."</td>";
 	}
 
 	for ($i = 0;$i<10;$i++) {
@@ -63,6 +60,7 @@ foreach ($dataJSON['json'] as $key => $value) {
 			}
 		echo "</tr>";
 	}
+
 	for ($j = 0;$j<8;$j++) {
 		$rowNumber = $j+10;
 		echo "<tr id='".$rowNumber."' style='display:none;'>";
@@ -71,7 +69,12 @@ foreach ($dataJSON['json'] as $key => $value) {
 		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
 			echo "<td>".round($chunk['Emotions'][$j]['Confidence'],2)."%</td>";
 		}
-	echo "</tr>";
-}
+
+		echo "</tr>";
+	}
 	echo "</table>";
+
+	flock($f, LOCK_UN); 
+	fclose($f);
+	unlink('uneditable');
 ?>

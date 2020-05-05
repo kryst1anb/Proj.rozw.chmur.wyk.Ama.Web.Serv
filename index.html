@@ -1,158 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link id="favicon" rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Home page | Amazon Rekognition</title>
   </head>
+
   <body>
-    <canvas id="photo"></canvas><br />
-    <input id="file" type="file" />
-    <img class="options" src="settings.png" />
-    <div class="sidebar" style="display: none;" id="menuToggle">
-      <form>
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="0"
-          checked
-          onchange="tableCheck()"
-        />Age Range
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="1"
-          checked
-          onchange="tableCheck()"
-        />Smile
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="2"
-          checked
-          onchange="tableCheck()"
-        />Eyeglasses
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="3"
-          checked
-          onchange="tableCheck()"
-        />Sunglasses
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="4"
-          checked
-          onchange="tableCheck()"
-        />Gender
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="5"
-          checked
-          onchange="tableCheck()"
-        />Beard
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="6"
-          checked
-          onchange="tableCheck()"
-        />Mustache
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="7"
-          checked
-          onchange="tableCheck()"
-        />Eyes Open
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="8"
-          checked
-          onchange="tableCheck()"
-        />Mouth Open
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="9"
-          checked
-          onchange="tableCheck()"
-        />Confidence
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="10"
-          onchange="tableCheck()"
-        />Happy
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="11"
-          onchange="tableCheck()"
-        />Calm
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="12"
-          onchange="tableCheck()"
-        />Sad
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="13"
-          onchange="tableCheck()"
-        />Surprised
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="14"
-          onchange="tableCheck()"
-        />Disguisted
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="15"
-          onchange="tableCheck()"
-        />Fear
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="16"
-          onchange="tableCheck()"
-        />Angry
-        <br />
-        <input
-          type="checkbox"
-          name="optionCheckBox"
-          value="17"
-          onchange="tableCheck()"
-        />Confused
-        <br />
-      </form>
+    <div class="whole-contener">
+      <input id="file" type="file" />
+      <label for="file" class="home-rectangle">
+        <div class="rectangle-text">
+          <div class="upload-photo">
+            <p>Upload</p>
+            <p class="border-p">photo</p>
+          </div>
+          <div>
+            <p class="description">Please upload the photo</p>
+          </div>
+        </div>
+
+        <div class="img-upload">
+          <img src="arrow.png" alt="upload icon" />
+        </div>
+      </label>
+      <div class="canvas-photo"><canvas id="photo"></canvas><br /></div>
+
+      <div class="main-tab">
+        <img class="settings-img" src="settings.png" alt="settings" />
+        <div class="tabandsett">
+          <p class="tab-name">Table of content</p>
+        </div>
+
+        <p id="demo"></p>
+        <div id="test"></div>
+      </div>
     </div>
-    <p id="demo"></p>
-    <div id="test"></div>
+    <div class="copy">
+      <p>Copyright &copy; by KUTAR3</p>
+    </div>
+
     <script>
-      $(".options").click(function () {
+      $("#options").click(function () {
         $(".sidebar").toggle("slow");
       });
     </script>
