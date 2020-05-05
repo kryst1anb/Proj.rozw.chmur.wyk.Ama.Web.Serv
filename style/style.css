@@ -72,9 +72,8 @@ body {
 
 .copy {
   color: #d9d9da;
-  position: absolute;
-  bottom: 8px;
-  left: 16px;
+  position: inherit;
+  margin-bottom: 10px;
   font-size: 15px;
 }
 
