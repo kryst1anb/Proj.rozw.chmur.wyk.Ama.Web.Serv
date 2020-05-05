@@ -81,7 +81,7 @@ function drawRECT(widthtPhoto, heightPhoto) {
     ctx.lineWidth = "6";
 
     randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    console.log(randomColor.length);
+    //console.log(randomColor.length);
 
     if (randomColor.length < 7) {
       randomColor += "f";
@@ -89,10 +89,9 @@ function drawRECT(widthtPhoto, heightPhoto) {
 
     ctx.strokeStyle = randomColor;
     elementID = "colName_" + i;
-    console.log(elementID + ":" + randomColor);
+    //console.log(elementID + ":" + randomColor);
 
     document.getElementById(elementID).style.backgroundColor = randomColor;
-
     var json = myArr["FaceDetails"][i]["BoundingBox"];
     var ratioX = localStorage + ".ratioX" + i;
     var ratioY = localStorage + ".ratioY" + i;
