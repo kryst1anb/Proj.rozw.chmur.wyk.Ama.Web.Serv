@@ -48,7 +48,7 @@ body {
   border-style: none;
   text-decoration: none;
   outline: none;
-  width: 35%;
+  width: 50%;
   height: 250px;
   padding: 20px;
   background-color: #97969b;
@@ -86,7 +86,7 @@ label:hover {
 }
 
 #photo {
-  width: 100%;
+  width: 80%;
   /* height: 350px; */
   background-size: 100%;
   background-repeat: no-repeat;
@@ -98,7 +98,7 @@ label:hover {
 .canvas-photo {
   visibility: hidden;
   margin: auto;
-  width: 35%;
+  width: 50%;
   height: 350px;
   padding: 20px;
   /* border: 1px solid rgba(50, 50, 50, 0.2); */
@@ -122,19 +122,19 @@ label:hover {
   text-transform: uppercase;
   display: inline;
 }
-.settings-img {
+/* .settings-img {
   width: 20px;
   height: 20px;
   margin-top: 10px;
   margin-left: 10px;
   position: inherit;
   z-index: 2;
-}
+} */
 
 .main-tab {
   visibility: hidden;
   margin: auto;
-  width: 35%;
+  width: 50%;
   padding: 20px;
   background-color: rgba(50, 50, 50, 0.7);
   margin-top: 1%;
@@ -152,12 +152,10 @@ tr td:first-child {
 /* -----MENU*/
 
 .options {
-  position: inherit;
-  z-index: 2;
+  display: flex;
   width: 20px;
   height: 20px;
-  margin-top: 10px;
-  margin-left: 10px;
+  float: right;
 }
 
 #menuToggle {

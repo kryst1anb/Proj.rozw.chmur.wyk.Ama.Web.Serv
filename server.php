@@ -11,9 +11,6 @@ if($dataJSON == null) {
     $ok = false;
 }
 
-flock($f, LOCK_UN); 
-fclose($f);
-
 foreach($dataJSON['json']['FaceDetails'] as $chunk) {
 	unset($chunk["Landmarks"],$chunk["Pose"],$chunk["BoundingBox"]);
 }
@@ -63,6 +60,7 @@ foreach ($dataJSON['json'] as $key => $value) {
 			}
 		echo "</tr>";
 	}
+
 	for ($j = 0;$j<8;$j++) {
 		$rowNumber = $j+10;
 		echo "<tr id='".$rowNumber."' style='display:none;'>";
@@ -71,7 +69,12 @@ foreach ($dataJSON['json'] as $key => $value) {
 		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
 			echo "<td>".round($chunk['Emotions'][$j]['Confidence'],2)."%</td>";
 		}
-	echo "</tr>";
-}
+
+		echo "</tr>";
+	}
 	echo "</table>";
+
+	flock($f, LOCK_UN); 
+	fclose($f);
+	unlink('uneditable');
 ?>
