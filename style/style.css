@@ -173,3 +173,7 @@ tr td:first-child {
   position: relative;
 }
 /* -----MENU*/
+
+table {
+  margin-top: 20px;
+}
