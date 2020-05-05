@@ -127,6 +127,8 @@ label:hover {
   height: 20px;
   margin-top: 10px;
   margin-left: 10px;
+  position: inherit;
+  z-index: 2;
 }
 
 .main-tab {
@@ -146,3 +148,30 @@ tr td:first-child {
   color: darkseagreen;
   font-weight: bold;
 }
+
+/* -----MENU*/
+
+.options {
+  position: inherit;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#menuToggle {
+  color: white;
+  position: inherit;
+  z-index: 1;
+  /* background: rgba(0, 0, 0, 0.85); */
+  width: 550px;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-top: 10px;
+}
+
+#table {
+  position: relative;
+}
+/* -----MENU*/

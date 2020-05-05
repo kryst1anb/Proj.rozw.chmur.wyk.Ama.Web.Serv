@@ -32,7 +32,147 @@
       <div class="main-tab">
         <div class="tabandsett">
           <p class="tab-name">Table of content</p>
-          <img class="settings-img" src="settings.png" alt="settings" />
+          <img class="options" src="settings.png" alt="settings" />
+        </div>
+        <div class="sidebar" style="display: none;" id="menuToggle">
+          <form>
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="0"
+              checked
+              onchange="tableCheck()"
+            />Age Range
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="1"
+              checked
+              onchange="tableCheck()"
+            />Smile
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="2"
+              checked
+              onchange="tableCheck()"
+            />Eyeglasses
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="3"
+              checked
+              onchange="tableCheck()"
+            />Sunglasses
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="4"
+              checked
+              onchange="tableCheck()"
+            />Gender
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="5"
+              checked
+              onchange="tableCheck()"
+            />Beard
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="6"
+              checked
+              onchange="tableCheck()"
+            />Mustache
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="7"
+              checked
+              onchange="tableCheck()"
+            />Eyes Open
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="8"
+              checked
+              onchange="tableCheck()"
+            />Mouth Open
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="9"
+              checked
+              onchange="tableCheck()"
+            />Confidence
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="10"
+              onchange="tableCheck()"
+            />Happy
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="11"
+              onchange="tableCheck()"
+            />Calm
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="12"
+              onchange="tableCheck()"
+            />Sad
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="13"
+              onchange="tableCheck()"
+            />Surprised
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="14"
+              onchange="tableCheck()"
+            />Disguisted
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="15"
+              onchange="tableCheck()"
+            />Fear
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="16"
+              onchange="tableCheck()"
+            />Angry
+            <br />
+            <input
+              type="checkbox"
+              name="optionCheckBox"
+              value="17"
+              onchange="tableCheck()"
+            />Confused
+            <br />
+          </form>
         </div>
         <p id="demo"></p>
         <div id="test"></div>
@@ -43,7 +183,7 @@
     </div>
 
     <script>
-      $("#options").click(function () {
+      $(".options").click(function () {
         $(".sidebar").toggle("slow");
       });
     </script>
