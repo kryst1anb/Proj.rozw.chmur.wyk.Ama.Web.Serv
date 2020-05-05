@@ -10,78 +10,68 @@ if($dataJSON == null) {
     $result = array('status' => false, 'code' => 1, 'value' => 'Bad format');
     $ok = false;
 }
+
 flock($f, LOCK_UN); 
-    fclose($f);
-//print_r(array_column($dataJSON, "FaceDetails"));
-// print_r($dataJSON['json']['FaceDetails']['0']);
-// print("<br/><br/>");
-// print_r($dataJSON['json']['FaceDetails']['1']);
-// print("<br/><br/>");
-// print_r($dataJSON['json']['FaceDetails']['2']);
-$i = 0 ;
-print("=================================BEFORE=================================<br/>");
+fclose($f);
+
 foreach($dataJSON['json']['FaceDetails'] as $chunk) {
-	print($i);
-	print_r(json_encode($chunk));
-	print("<br/><br/>");
-	$i++;
-  }
-  $i = 0 ;
-print("==================================AFTER==================================<br/>");
-foreach($dataJSON['json']['FaceDetails'] as $chunk) {
-	print($i);
 	unset($chunk["Landmarks"],$chunk["Pose"],$chunk["BoundingBox"]);
-	print_r(json_encode($chunk));
-	print("<br/><br/>");
-	$i++;
-  }
+}
 
-// function loadTable($data){
-// 	if($dataJSON['send'] === true)){
-// 		$nazwa_pliku = $dataJSON['nazwa_pliku'];
-// 		if(isset($dataJSON['wyraz'])){
-// 				if(file_exists("OSOBA/$nazwa_pliku")){
-// 					$plik = json_decode(file_get_contents("OSOBA/$nazwa_pliku"),true);
-// 					if($plik == null) 
-// 						$plik = array();
-// 				}
-// 				else{
-// 				$plik = array();
-// 				}
-				
-// 				$panstwa = json_decode(file_get_contents("json/check.json"),true); //wczytanie wszystkich państw JSON
-// 			$wyraz = $dataJSON['wyraz']; //przypisanie szukanego ciagu do zmiennej
-// 				$result = '';
-				
-// 				if ($wyraz !== '') {
-// 				    $wyraz = strtolower($wyraz); //zamiana na małe litery
-// 			    $dlugosc_wyrazu = strlen($wyraz); // liczenie długości ciągu
-// 				    foreach($panstwa as $panstwo) { //wczytanie wszystkich państw z JSON w odpowiednim formacie
-// 				        if (stristr($wyraz, substr($panstwo, 0, $dlugosc_wyrazu-1))) { 
-// 							/*stristr() zwraca wszystko to co jest za stringiem w tym przypadku za $wyraz. 
-// 							$wyraz jest podane przez użytkownika (pierwszy znak/znaki - /ogolnie string/). 
-// 							substr() wyswietla okreslona liczbe znaków z ciagu w tym przypadku nazwe kraju od poczatku do konca jego nazwy
-// 						*/
-// 				            if ($result === '') {
-// 								$result = '<option value='.$panstwo.'>'; // jeżeli pierwsze państwo to wypisuje bez przecinka
-// 				            } else {
-// 							$result .= '<option value='.$panstwo.'>'; // dopisuje kolejne pasujące państwo po przecinku
-// 				            }
-// 				        }
-// 				    }
-// 				}
-// 				//$result = substr($result,0,strlen($result)-1);
-// 				$plik['panstwo']=$wyraz;
+foreach ($dataJSON['json'] as $key => $value) {
+    $intcols = count($value);
+}
 
-// 				file_put_contents("OSOBA/$nazwa_pliku",json_encode($plik, JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE+JSON_UNESCAPED_SLASHES));			
-// 				return $result === '' ? 'Brak państwa' : $result; // jezeli pusty zwraca brak w innym przypadku zwraca państwa
-// 			}
-// 			else{
-// 				return array('status' => false, 'code' => 5, 'value' => 'Brak podanego wyrazu');
-// 			}
-// 	}
-// 	else{
-// 			return array('status' => false, 'code' => 2, 'value' => 'Unexpected access');
-// 	}
-// }
+	$array = ['AgeRange','Smile','Eyeglasses','Sunglasses','Gender','Beard','Mustache','EyesOpen','MouthOpen','Confidence'];
+	$arrayEmotions = ['Happy','Calm','Sad','Surprised','Disguisted','Fear','Angry','Confused'];
+
+	echo "<table id='table'>";
+	echo "<td>Name of Attribute</td>";
+	for($j=0;$j<$intcols;$j++) {
+		$id = $j +1;
+		echo "<td id='colName_".$j."'>Person ".$id."</td>";
+	}
+
+	for ($i = 0;$i<10;$i++) {
+
+			echo "<tr id='".$i."'>";
+			echo "<td>".$array[$i]."</td>";
+
+			foreach($dataJSON['json']['FaceDetails'] as $chunk) {
+				if ($chunk[$array[$i]] == $chunk['AgeRange']){
+					echo "<td>".$chunk['AgeRange']['Low']."-".$chunk['AgeRange']['High']."</td>";
+				}
+				else if($chunk[$array[$i]] == $chunk['Gender']){
+					if($chunk['Gender']['Value'] == "Male"){
+						echo "<td>Male in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+					}
+					else {
+						echo "<td>Female in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+					}
+				}
+				else if($chunk[$array[$i]] == $chunk['Confidence']){
+					echo "<td>" .round($chunk['Confidence'], 2)."%</td>";
+				}
+				else if($chunk[$array[$i]] != $chunk['AgeRange']){
+					if($chunk[$array[$i]]['Value'] == 1){
+						echo "<td>Has in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+					}
+					else {
+						echo "<td>Has not in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+					}
+				}
+			}
+		echo "</tr>";
+	}
+	for ($j = 0;$j<8;$j++) {
+		$rowNumber = $j+10;
+		echo "<tr id='".$rowNumber."' style='display:none;'>";
+		echo "<td>".$arrayEmotions[$j]."</td>";
+
+		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
+			echo "<td>".round($chunk['Emotions'][$j]['Confidence'],2)."%</td>";
+		}
+	echo "</tr>";
+}
+	echo "</table>";
 ?>

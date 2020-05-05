@@ -5,11 +5,10 @@ import sys
 reko = boto3.client('rekognition')
 
 pic =  str(sys.argv[1]) 
-pic = pic[:-4]
-pic_jpg = pic+".jpg"
-pic_json = pic+".json" 
+pic_w_ext = pic[:-4]
+pic_json = pic_w_ext+".json" 
 
-in_file = open(pic_jpg, "rb") 
+in_file = open(pic, "rb") 
 pic_binary = in_file.read() # if you only wanted to read 512 bytes, do .read(512)
 in_file.close()
 

@@ -32,14 +32,23 @@ document.getElementById("file").addEventListener("change", function (e) {
   file = fileName.replace(/\.[^/.]+$/, "");
   fileNameJSON = file + ".json";
 
+  // if (document.getElementById("file").value != "") {
+  //   // you have a file
+  //   getJSON();
+  // }
+
+  // if (document.getElementById("file").files.length == 0) {
+  //   console.log("no files selected");
+  // } else {
+  //   getJSON();
+  // }
   getJSON();
   xhr.send(data);
 });
 
-var x = document.getElementById("file");
 var _URL = window.URL || window.webkitURL;
-x.addEventListener("change", function (e) {
-  if (x) {
+document.getElementById("file").addEventListener("change", function (e) {
+  if (document.getElementById("file")) {
     var file, img;
 
     if ((file = this.files[0])) {
@@ -48,9 +57,10 @@ x.addEventListener("change", function (e) {
         //alert("width: " + this.width + " Height: " + this.height);
         document.getElementsByClassName("canvas-photo")[0].style.visibility =
           "visible";
+        document.getElementsByClassName("main-tab")[0].style.visibility =
+          "visible";
         document.getElementById("photo").width = this.width;
         document.getElementById("photo").height = this.height;
-
         drawRECT(this.width, this.height);
       };
       img.onerror = function () {
@@ -61,16 +71,19 @@ x.addEventListener("change", function (e) {
   }
 });
 var randomColor = "";
+
 function generateColor() {
-  randomColor = Math.floor(Math.random() * 16777215).toString(16);
-  randomColor = "#" + randomColor;
-  //console.log(randomColor);
+  var letters = "0123456789ABCDEF";
+  randomColor = "#";
+  for (var i = 0; i < 6; i++) {
+    randomColor += letters[Math.floor(Math.random() * 16)];
+  }
 }
 
 function drawRECT(widthtPhoto, heightPhoto) {
   localStorage.clear();
   //IMAGE_WIDTH*LEFT_RATIO (X) , IMAGE_HEIGHT*TOP_RATIO (Y) , IMAGE_WIDTH*WIDTH_RATIO , IMAGE_HEIGHT*HEIGHT_RATIO
-  for (let i = 0; i < myArr["FaceDetails"].length; i++) {
+  for (let i = 0; i < myArr["FaceDetails"].length; ++i) {
     var c = document.getElementById("photo");
     imageHeight = heightPhoto;
     imageWidtht = widthtPhoto;
@@ -80,8 +93,10 @@ function drawRECT(widthtPhoto, heightPhoto) {
     var ctx = c.getContext("2d");
     ctx.beginPath();
     ctx.lineWidth = "6";
-    generateColor();
-    ctx.strokeStyle = randomColor;
+    //generateColor();
+    ctx.strokeStyle = "#FF00FF";
+    var elementID = "colName_" + i;
+    document.getElementById(elementID).style.backgroundColor = "#FF00FF";
 
     var json = myArr["FaceDetails"][i]["BoundingBox"];
 
@@ -103,7 +118,7 @@ function drawRECT(widthtPhoto, heightPhoto) {
     );
     ctx.stroke();
   }
-  localStorage.clear();
+  //localStorage.clear();
 }
 
 var myArr;
@@ -115,7 +130,7 @@ function getJSON() {
       myArr = JSON.parse(this.responseText);
       sendJSON();
       //console.log("SEND..");
-      console.log(myArr);
+      //console.log(myArr);
     }
   };
   xmlhttp.open("GET", fileNameJSON, true);
