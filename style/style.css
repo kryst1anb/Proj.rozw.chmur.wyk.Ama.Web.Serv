@@ -110,12 +110,40 @@ label:hover {
 .whole-contener {
   margin-bottom: 50px;
 }
+.tabandsett {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+.tab-name {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: darkseagreen;
+  text-transform: uppercase;
+  display: inline;
+}
+.settings-img {
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
 
 .main-tab {
   visibility: hidden;
   margin: auto;
   width: 35%;
   padding: 20px;
-  background-color: rgba(50, 50, 50, 0.2);
+  background-color: rgba(50, 50, 50, 0.7);
   margin-top: 1%;
+  color: white;
+}
+.first-line-tab {
+  color: white;
+}
+
+tr td:first-child {
+  color: darkseagreen;
+  font-weight: bold;
 }

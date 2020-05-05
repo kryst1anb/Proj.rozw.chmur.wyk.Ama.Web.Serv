@@ -26,10 +26,10 @@ foreach ($dataJSON['json'] as $key => $value) {
 	$arrayEmotions = ['Happy','Calm','Sad','Surprised','Disguisted','Fear','Angry','Confused'];
 
 	echo "<table id='table'>";
-	echo "<td>Name of Attribute</td>";
+	echo "<td class='first-line-tab'>Name of Attribute</td>";
 	for($j=0;$j<$intcols;$j++) {
 		$id = $j +1;
-		echo "<td id='colName_".$j."'>Person ".$id."</td>";
+		echo "<td class='first-line-tab' id='colName_".$j."'>Person ".$id."</td>";
 	}
 
 	for ($i = 0;$i<10;$i++) {
