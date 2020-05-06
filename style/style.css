@@ -21,6 +21,11 @@ body {
   font-family: "Segoe UI", sans-serif;
 }
 
+.whole-contener {
+  margin-bottom: 50px;
+}
+
+/*------Input photo container*/
 .border-p {
   font-weight: bolder;
 }
@@ -70,16 +75,6 @@ body {
   width: 90%;
 }
 
-/*------Footer*/
-.copy {
-  color: #d9d9da;
-  font-size: 15px;
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-}
-/* ------------Footer */
-
 #file {
   display: none;
 }
@@ -87,73 +82,29 @@ body {
 label:hover {
   background: rgba(50, 50, 50, 0.3);
 }
+/* ------------Input photo container */
 
+/*------Uploaded photo container*/
 #photo {
   width: 80%;
-  /* height: 350px; */
   background-size: 100%;
   background-repeat: no-repeat;
-  /* background-image: url("drive_resized.jpg"); */
   display: flex;
   margin: auto;
 }
 
 .canvas-photo {
-  /* visibility: hidden; */
   margin: auto;
   width: 50%;
   height: 350px;
   padding: 20px;
-  /* border: 1px solid rgba(50, 50, 50, 0.2); */
   background-color: rgba(50, 50, 50, 0.2);
   margin-top: 1%;
 }
 
-.whole-contener {
-  margin-bottom: 50px;
-}
-.tabandsett {
-  display: flex;
-  margin-top: 20px;
-  justify-content: center;
-}
-.tab-name {
-  text-align: center;
-  font-size: 30px;
-  font-weight: bold;
-  color: darkseagreen;
-  text-transform: uppercase;
-  display: inline;
-}
-/* .settings-img {
-  width: 20px;
-  height: 20px;
-  margin-top: 10px;
-  margin-left: 10px;
-  position: inherit;
-  z-index: 2;
-} */
-
-.main-tab {
-  /* visibility: hidden; */
-  margin: auto;
-  width: 50%;
-  padding: 20px;
-  background-color: rgba(50, 50, 50, 0.7);
-  margin-top: 1%;
-  color: white;
-}
-.first-line-tab {
-  color: white;
-}
-
-tr td:first-child {
-  color: darkseagreen;
-  font-weight: bold;
-}
+/* ------------Uploaded photo container */
 
 /* -----MENU*/
-
 .options {
   display: flex;
   width: 20px;
@@ -165,18 +116,59 @@ tr td:first-child {
   color: white;
   position: inherit;
   z-index: 1;
-  /* background: rgba(0, 0, 0, 0.85); */
   width: 550px;
   -webkit-user-select: none;
   user-select: none;
   margin-top: 10px;
 }
-
-#table {
-  position: relative;
-}
 /* -----MENU*/
 
-table {
+/* -----TABLE*/
+#table {
+  position: relative;
   margin-top: 20px;
 }
+
+.tabandsett {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.tab-name {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: darkseagreen;
+  text-transform: uppercase;
+  display: inline;
+}
+
+.main-tab {
+  margin: auto;
+  width: 50%;
+  padding: 20px;
+  background-color: rgba(50, 50, 50, 0.7);
+  margin-top: 1%;
+  color: white;
+}
+
+.first-line-tab {
+  color: white;
+}
+
+tr td:first-child {
+  color: darkseagreen;
+  font-weight: bold;
+}
+/* -----TABLE*/
+
+/*------Footer*/
+.copy {
+  color: #d9d9da;
+  font-size: 15px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+/* ------------Footer */
