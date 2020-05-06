@@ -116,17 +116,29 @@ label:hover {
   color: white;
   position: inherit;
   z-index: 1;
-  width: 550px;
+  /* width: 550px; */
   -webkit-user-select: none;
   user-select: none;
   margin-top: 10px;
+  margin-left: 25px;
+  /* text-align: center; */
 }
+
+form input {
+  margin-right: 10px;
+}
+form {
+  width: 150px;
+  margin: auto;
+}
+
 /* -----MENU*/
 
 /* -----TABLE*/
 #table {
   position: relative;
-  margin-top: 20px;
+  padding-top: 20px;
+  margin: auto;
 }
 
 .tabandsett {
@@ -160,6 +172,10 @@ label:hover {
 tr td:first-child {
   color: darkseagreen;
   font-weight: bold;
+}
+
+tr td + td {
+  padding-left: 25px;
 }
 /* -----TABLE*/
 
