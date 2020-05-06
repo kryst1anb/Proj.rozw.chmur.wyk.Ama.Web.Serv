@@ -162,7 +162,9 @@ function sendJSON(myArr) {
     if (xmlhttp.readyState === XMLHttpRequest.DONE) {
       var status = xmlhttp.status;
       if (status === 0 || (status >= 200 && status < 400)) {
-        document.getElementById("demo").innerHTML = this.responseText;
+        document.getElementsByClassName(
+          "inner"
+        )[0].innerHTML = this.responseText;
         document.getElementById("photo").width = img.width;
         document.getElementById("photo").height = img.height;
         drawAll();

@@ -139,7 +139,7 @@ form label {
 
 /* -----TABLE*/
 #table {
-  position: relative;
+  /* position: relative; */
   padding-top: 20px;
   margin: auto;
   margin-bottom: 15px;
@@ -176,7 +176,7 @@ form label {
 tr td:first-child {
   color: darkseagreen;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
 }
 
 tr:first-child {
@@ -209,23 +209,7 @@ td {
   text-align: center;
 }
 
-.container {
-  overflow-x: scroll;
-}
-
 /* -----TABLE*/
-
-/*------Footer*/
-.copy {
-  color: #d9d9da;
-  font-size: 15px;
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-}
-/* ------------Footer */
-
-/* SCROLLBAR */
 
 ::-webkit-scrollbar {
   width: 7px;
@@ -248,4 +232,34 @@ td {
   background: darkseagreen;
 }
 
-/* SCROLLBAR */
+td,
+th {
+  margin: 0;
+  white-space: nowrap;
+}
+.inner {
+  width: 600px;
+  overflow-x: scroll;
+  /* margin-left: 150px; */
+  overflow-y: visible;
+  padding-bottom: 1px;
+}
+.headcol {
+  position: absolute;
+  width: 5em;
+  top: auto;
+  background-color: #505050;
+  margin-left: -5px;
+}
+
+tr td:first-child + td {
+  padding-left: 191px;
+}
+
+footer {
+  color: #d9d9da;
+  font-size: 15px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
