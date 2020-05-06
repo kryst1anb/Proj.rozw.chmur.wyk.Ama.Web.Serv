@@ -86,7 +86,7 @@ label:hover {
 
 /*------Uploaded photo container*/
 #photo {
-  width: 80%;
+  width: 100%;
   background-size: 100%;
   background-repeat: no-repeat;
   display: flex;
@@ -95,9 +95,8 @@ label:hover {
 
 .canvas-photo {
   margin: auto;
+  padding: 20px 20px 0px 20px;
   width: 50%;
-  height: 350px;
-  padding: 20px;
   background-color: rgba(50, 50, 50, 0.2);
   margin-top: 1%;
 }
@@ -139,6 +138,7 @@ form {
   position: relative;
   padding-top: 20px;
   margin: auto;
+  margin-bottom: 15px;
 }
 
 .tabandsett {
@@ -172,11 +172,43 @@ form {
 tr td:first-child {
   color: darkseagreen;
   font-weight: bold;
+  text-align: left;
+}
+
+tr:first-child {
+  font-weight: bolder;
 }
 
 tr td + td {
   padding-left: 25px;
 }
+
+.inner {
+  table-layout: fixed;
+  margin: 0px auto 0px auto;
+}
+td,
+th {
+  border-collapse: collapse;
+  border: 1px solid #777;
+  min-width: 150px;
+}
+th {
+  padding: 20px 7px;
+  font-size: 15px;
+  color: #444;
+  background: #66c2e0;
+}
+td {
+  padding: 5px 10px;
+  height: 35px;
+  text-align: center;
+}
+
+.container {
+  overflow-x: scroll;
+}
+
 /* -----TABLE*/
 
 /*------Footer*/
@@ -188,3 +220,28 @@ tr td + td {
   left: 10px;
 }
 /* ------------Footer */
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  /* background: #555; */
+  background: darkseagreen;
+}
+
+/* SCROLLBAR */
