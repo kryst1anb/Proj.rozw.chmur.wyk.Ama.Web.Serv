@@ -86,10 +86,9 @@ document.getElementById("file").addEventListener(
       img.onload = function () {
         //alert("width: " + this.width + " Height: " + this.height);
         // console.log(myArr.FaceDetails.length);
-        document.getElementsByClassName("canvas-photo")[0].style.visibility =
-          "visible";
-        document.getElementsByClassName("main-tab")[0].style.visibility =
-          "visible";
+        document.getElementsByClassName("canvas-photo")[0].style.display =
+          "block";
+        document.getElementsByClassName("main-tab")[0].style.display = "block";
 
         document.getElementById("photo").width = this.width;
         document.getElementById("photo").height = this.height;

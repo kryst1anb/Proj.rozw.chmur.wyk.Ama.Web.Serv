@@ -70,12 +70,15 @@ body {
   width: 90%;
 }
 
+/*------Footer*/
 .copy {
   color: #d9d9da;
-  position: inherit;
-  margin-bottom: 10px;
   font-size: 15px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
 }
+/* ------------Footer */
 
 #file {
   display: none;
@@ -96,7 +99,7 @@ label:hover {
 }
 
 .canvas-photo {
-  visibility: hidden;
+  /* visibility: hidden; */
   margin: auto;
   width: 50%;
   height: 350px;
@@ -132,7 +135,7 @@ label:hover {
 } */
 
 .main-tab {
-  visibility: hidden;
+  /* visibility: hidden; */
   margin: auto;
   width: 50%;
   padding: 20px;
