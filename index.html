@@ -27,9 +27,7 @@
           <img src="img/arrow.png" alt="upload icon" />
         </div>
       </label>
-      <div class="canvas-photo" style="display: none;">
-        <canvas id="photo"></canvas><br />
-      </div>
+      <div class="canvas-photo" style="display: none;"><canvas id="photo"></canvas><br /></div>
 
       <div class="main-tab" style="display: none;">
         <img class="options" src="settings.png" alt="settings" />
@@ -38,141 +36,30 @@
         </div>
         <div class="sidebar" style="display: none;" id="menuToggle">
           <form>
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="0"
-              checked
-              onchange="tableCheck()"
-            />Age Range
             <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="1"
-              checked
-              onchange="tableCheck()"
-            />Smile
+            <input type="checkbox" id="checkbox1" name="optionCheckBox" value="0" checked onchange="tableCheck()" /><label for="checkbox1">Age Range</label>
+            <input type="checkbox" id="checkbox2" name="optionCheckBox" value="1" checked onchange="tableCheck()" /><label for="checkbox2">Smile</label>
+            <input type="checkbox" id="checkbox3" name="optionCheckBox" value="2" checked onchange="tableCheck()" /><label for="checkbox3">Eyeglasses</label>
             <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="2"
-              checked
-              onchange="tableCheck()"
-            />Eyeglasses
+            <input type="checkbox" id="checkbox4" name="optionCheckBox" value="3" checked onchange="tableCheck()" /><label for="checkbox4">Sunglasses</label>
+            <input type="checkbox" id="checkbox5" name="optionCheckBox" value="4" checked onchange="tableCheck()" /><label for="checkbox5">Gender</label>
+            <input type="checkbox" id="checkbox6" name="optionCheckBox" value="5" checked onchange="tableCheck()" /><label for="checkbox6">Beard</label>
             <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="3"
-              checked
-              onchange="tableCheck()"
-            />Sunglasses
+            <input type="checkbox" id="checkbox7" name="optionCheckBox" value="6" checked onchange="tableCheck()" /><label for="checkbox7">Mustache</label>
+            <input type="checkbox" id="checkbox8" name="optionCheckBox" value="7" checked onchange="tableCheck()" /><label for="checkbox8">Eyes Open</label>
+            <input type="checkbox" id="checkbox9" name="optionCheckBox" value="8" checked onchange="tableCheck()" /><label for="checkbox9">Mouth Open</label>
             <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="4"
-              checked
-              onchange="tableCheck()"
-            />Gender
+            <input type="checkbox" id="checkbox10" name="optionCheckBox" value="9" checked onchange="tableCheck()" /><label for="checkbox10">Confidence</label>
+            <input type="checkbox" id="checkbox11" name="optionCheckBox" value="10" onchange="tableCheck()" /><label for="checkbox11">Happy</label>
+            <input type="checkbox" id="checkbox12" name="optionCheckBox" value="11" onchange="tableCheck()" /><label for="checkbox12">Calm</label>
             <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="5"
-              checked
-              onchange="tableCheck()"
-            />Beard
+            <input type="checkbox" id="checkbox13" name="optionCheckBox" value="12" onchange="tableCheck()" /><label for="checkbox13">Sad</label>
+            <input type="checkbox" id="checkbox14" name="optionCheckBox" value="13" onchange="tableCheck()" /><label for="checkbox14">Surprised</label>
+            <input type="checkbox" id="checkbox15" name="optionCheckBox" value="14" onchange="tableCheck()" /><label for="checkbox15">Disguisted</label>
             <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="6"
-              checked
-              onchange="tableCheck()"
-            />Mustache
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="7"
-              checked
-              onchange="tableCheck()"
-            />Eyes Open
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="8"
-              checked
-              onchange="tableCheck()"
-            />Mouth Open
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="9"
-              checked
-              onchange="tableCheck()"
-            />Confidence
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="10"
-              onchange="tableCheck()"
-            />Happy
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="11"
-              onchange="tableCheck()"
-            />Calm
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="12"
-              onchange="tableCheck()"
-            />Sad
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="13"
-              onchange="tableCheck()"
-            />Surprised
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="14"
-              onchange="tableCheck()"
-            />Disguisted
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="15"
-              onchange="tableCheck()"
-            />Fear
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="16"
-              onchange="tableCheck()"
-            />Angry
-            <br />
-            <input
-              type="checkbox"
-              name="optionCheckBox"
-              value="17"
-              onchange="tableCheck()"
-            />Confused
+            <input type="checkbox" id="checkbox16" name="optionCheckBox" value="15" onchange="tableCheck()" /><label for="checkbox16">Fear</label>
+            <input type="checkbox" id="checkbox17" name="optionCheckBox" value="16" onchange="tableCheck()" /><label for="checkbox17">Angry</label>
+            <input type="checkbox" id="checkbox18" name="optionCheckBox" value="17" onchange="tableCheck()" /><label for="checkbox18">Confused</label>
             <br />
           </form>
         </div>
