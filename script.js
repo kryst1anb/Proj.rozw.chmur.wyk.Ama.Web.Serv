@@ -26,27 +26,21 @@ function getJSON() {
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState === XMLHttpRequest.DONE) {
       var status = xmlhttp.status;
-      if (status === 0 || (status >= 200 && status < 400)) {
-        document.getElementsByClassName("functionBox")[0].style.display = "none";
-        document.getElementsByClassName("loader")[0].style.display = "none";
-        clearInterval(refreshIntervalId);
 
-        myArr = JSON.parse(this.responseText);
-        lenghtOfPeople = myArr.FaceDetails.length;
-        //console.log("myArr.FaceDetails.length " + lenghtOfPeople);
-        sendJSON(myArr);
-      } else {
-        var refreshIntervalId = setInterval(() => {
-          if (status === 0 || (status >= 200 && status < 400)) {
-            document.getElementsByClassName("functionBox")[0].style.display = "none";
-            document.getElementsByClassName("loader")[0].style.display = "none";
-            clearInterval(refreshIntervalId);
-          } else {
-            status = 0;
-            getJSON();
-          }
-        }, 1500);
-      }
+      var refreshIntervalId = setInterval(() => {
+        if (status === 0 || (status >= 200 && status < 400)) {
+          clearInterval(refreshIntervalId);
+          myArr = JSON.parse(this.responseText);
+          lenghtOfPeople = myArr.FaceDetails.length;
+          //console.log("myArr.FaceDetails.length " + lenghtOfPeople);
+          sendJSON(myArr);
+          document.getElementsByClassName("functionBox")[0].style.display = "none";
+          document.getElementsByClassName("loader")[0].style.display = "none";
+        } else {
+          status = 0;
+          getJSON();
+        }
+      }, 1500);
     }
   };
   xmlhttp.send();
@@ -102,7 +96,7 @@ document.getElementById("file").addEventListener(
 function drawAll() {
   clearVariables();
   //IMAGE_WIDTH*LEFT_RATIO (X) , IMAGE_HEIGHT*TOP_RATIO (Y) , IMAGE_WIDTH*WIDTH_RATIO , IMAGE_HEIGHT*HEIGHT_RATIO
-  for (var i = 0; i < lenghtOfPeople; ++i) {
+  for (var i = 0; i < lenghtOfPeople; i++) {
     imgHeight = document.getElementById("photo").height;
     imgWidth = document.getElementById("photo").width;
 
@@ -110,18 +104,9 @@ function drawAll() {
     var ctx = canvas.getContext("2d");
     ctx.beginPath();
     ctx.lineWidth = "3";
-
-    if (imgWidth > 500 && imgHeight > 300) {
-      ctx.lineWidth = "6";
-      ctx.font = "Bold 48px Comic Sans MS";
-      ctx.fillText(i + 1, imgWidth * ratioX, imgHeight * ratioY - 10);
-    }
-
     var getColor = randomColor();
-    document.getElementById("colName_" + i).style.color = getColor;
-    ctx.strokeStyle = getColor;
     ctx.fillStyle = getColor;
-
+    ctx.strokeStyle = getColor;
     var json = myArr["FaceDetails"][i]["BoundingBox"];
 
     var ratioX = 0;
@@ -133,6 +118,15 @@ function drawAll() {
     ratioWidth = json.Width;
     var ratioHeight = 0;
     ratioHeight = json.Height;
+
+    if (imgWidth > 500 && imgHeight > 300) {
+      var numberPerson = i + 1;
+      ctx.lineWidth = "6";
+      ctx.font = "Bold 48px Comic Sans MS";
+      ctx.fillText(numberPerson, imgWidth * ratioX, imgHeight * ratioY - 10);
+    }
+
+    document.getElementById("colName_" + i).style.color = getColor;
 
     ctx.rect(imgWidth * ratioX, imgHeight * ratioY, imgWidth * ratioWidth, imgHeight * ratioHeight);
     ctx.stroke();
