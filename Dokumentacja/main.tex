@@ -1,0 +1,468 @@
+\documentclass[12pt]{report}
+\usepackage[english]{babel}
+\usepackage{polski}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{listings}
+\usepackage{anyfontsize}
+\usepackage{color}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setmarginsrb{1.5 cm}{1.5 cm}{1.5 cm}{1.5 cm}{1 cm}{1.0 cm}{1 cm}{1.0 cm}
+
+\addto\captionsenglish{\renewcommand*\contentsname{Spis treści}}
+\addto\captionsenglish{\renewcommand\bibname{Bibliografia}}
+
+\title{RecognizeMe - rozpoznawanie twarzy Amazon Rekognition}								\author{Aleksander Boronowski}
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\lhead{\thetitle}
+\cfoot{\thepage}
+\usepackage{tikz}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,calc}
+ 
+\tikzset{
+block/.style={
+  draw,
+  rectangle,
+  text width=3em,
+  text centered,
+  minimum height=8mm,    
+  node distance=2.3em
+  },
+line/.style={draw}
+}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.3 cm}
+	 
+\begin{center}    \textbf{\LARGE RecognizeMe\\ \vspace*{0.3 cm} rozpoznawanie twarzy Amazon Rekognition}\\[0.8 cm]	\end{center}
+   \includegraphics[scale = 0.40]{logo.png}\\[0.6 cm]
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft} \large
+			\end{flushleft}
+			\end{minipage}~
+			\begin{minipage}{0.6\textwidth}
+            
+			\begin{flushright} \large
+			\emph{Autorzy:} \\
+			Marta Lewandowska,\\
+			Krystian Barczak,\\
+			Aleksander Boronowski,\\
+			Wydział Matematyki Stosowanej\\
+			Kierunek Informatyka\\
+			VI semestr - grupa KUTAR3
+		\end{flushright}
+           
+	\end{minipage}\\[2 cm]
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+\renewcommand{\thesection}{\arabic{section}}
+
+\hyphenation{użytkownika wyświetli przeglądarki aplikacji przycisk}
+
+\section{Opis programu}
+\hspace{0.5cm}Webowa aplikacja pozwalająca na rozpoznanie twarzy wraz ze szczegółami z podanego przez użytkownika zdjęcia.
+
+\vspace*{0.3cm}
+\hspace{0.5cm}Program został wykonany w celu projektu zaliczeniowego z przedmiotu Projektowanie rozwiązań chmurowych z wykorzystaniem Amazon Web Services.
+\section{Instrukcja obsługi}
+\begin{enumerate}
+    \item \textbf{Upload własnego zdjęcia}\\\\
+W celu dodania zdjęcia, które użytkownik chce sprawdzić programem, należy kliknąć przycisk \textbf{"Upload photo"}, a następnie wybrać plik obrazu. Jeśli plik nie jest obrazem, wyświetli się błąd z nazwą podanego pliku.
+\vspace*{0.5 cm}
+\begin{center}
+
+\includegraphics[scale = 0.375]{main1.jpg}\\[0.4 cm]
+
+\includegraphics[scale = 0.515]{error.jpg}\\[0.4 cm]
+\end{center}
+\newpage
+    \item \textbf{Odczytywanie danych}\\\\
+Po poprawnym załadowaniu zdjęcia pod wyświetlonym obrazem użytkownika wyświetli się tabela z uzupełnionymi danymi. Pokazuje ona ilość wykrytych osób na zdjęciu oraz procent \\w jakim dany atrybut jest prawdopodobny dla zaznaczonej osoby. Jeśli na zdjęciu znajduję się dużo osób, tabele można przesuwać za pomocą scroll bara aby zobaczyć wszystkie dane.
+\\
+\vspace*{0.5cm}
+\begin{center}
+\includegraphics[scale = 0.5]{table.jpg}\\[0.2 cm]
+\end{center}
+\newpage
+    \item \textbf{Wyświetlanie danych}\\\\
+Użytkownik może wybrać, które dane mają wyśietlić się w tabelii. Wystarczy kliknąć przycisk opcji po prawej stronie oraz zaznaczyć lub odznaczyć interesujące go funkcje.
+\\
+\vspace*{0.5cm}
+\begin{center}
+\includegraphics[scale = 0.5]{settings.png}
+\end{center}
+\end{enumerate}
+\newpage
+ \section{Specyfikacja techniczna}
+ \vspace*{1.0 cm}
+ \textbf{Podział na pliki:} \\ \\
+ \begin{center}
+     \includegraphics[scale = 1.0]{pliki.jpg}\\[0.6 cm]
+ \end{center}
+ \vspace*{1,5cm}
+ \textbf{Kompilacja projektu: }\\
+ 
+\hspace{0.5cm} Do stworzenia projektu wykorzystany został program Microsoft Visual Studio Code oraz przeglądarki Google Chrome i Opera. Aplikacja napisana została w języku HTML oraz CSS. Funkcjonalność aplikacji natomiast napisana została w języku JavaScript, PHP i Python oraz framework jQuery.
+     \newpage
+     \section{Szczegóły techniczne}
+\begin{enumerate}
+\item \textbf{Funkcja odpowiedzialna za pobieranie danych JSON}\\ \\
+\begin{lstlisting}
+function getJSON() {
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", fileNameJSON, true);
+
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+      var status = xmlhttp.status;
+      if (status === 0 || (status >= 200 && status < 400)) {
+        document.getElementsByClassName("functionBox")[0].style.display = "none";
+        document.getElementsByClassName("loader")[0].style.display = "none";
+        clearInterval(refreshIntervalId);
+
+        myArr = JSON.parse(this.responseText);
+        lenghtOfPeople = myArr.FaceDetails.length;
+        sendJSON(myArr);
+      } else {
+        var refreshIntervalId = setInterval(() => {
+          if (status === 0 || (status >= 200 && status < 400)) {
+            document.getElementsByClassName("functionBox")[0].style.display = "none";
+            document.getElementsByClassName("loader")[0].style.display = "none";
+            clearInterval(refreshIntervalId);
+          } else {
+            status = 0;
+            getJSON();
+          }
+        }, 1500);
+      }
+    }
+  };
+  xmlhttp.send();
+}
+\end{lstlisting}
+
+\item \textbf{Funkcja odpowiedzialna za wysyłanie danych JSON do serwera PHP}\\ \\
+\begin{lstlisting}
+function sendJSON(myArr) {
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "server.php", true);
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+      var status = xmlhttp.status;
+
+      if (status === 0 || (status >= 200 && status < 400)) {
+        document.getElementsByClassName("inner")[0].innerHTML = this.responseText;
+        document.getElementById("photo").width = img.width;
+        document.getElementById("photo").height = img.height;
+        drawAll();
+      } else {
+        console.log("Oh no! There has been an error with the request!");
+      }
+    }
+  };
+  xmlhttp.send(
+    JSON.stringify({
+      send: true,
+      fileNameToPy: file.name,
+      length: myArr.FaceDetails.length,
+      json: myArr,
+    })
+  );
+}
+\end{lstlisting}
+
+\item \textbf{Funkcja odpowiedzialna za rysowanie Canvas oraz zaznaczanie na nim twarzy}\\ \\
+\begin{lstlisting}
+function drawAll() {
+  clearVariables();
+  for (var i = 0; i < lenghtOfPeople; ++i) {
+    imgHeight = document.getElementById("photo").height;
+    imgWidth = document.getElementById("photo").width;
+
+    var canvas = document.getElementById("photo");
+    var ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.lineWidth = "3";
+
+    if (imgWidth > 500 && imgHeight > 300) {
+      ctx.lineWidth = "6";
+      ctx.font = "Bold 48px Comic Sans MS";
+      ctx.fillText(i + 1, imgWidth * ratioX, imgHeight * ratioY - 10);
+    }
+
+    var getColor = randomColor();
+    document.getElementById("colName_" + i).style.color = getColor;
+    ctx.strokeStyle = getColor;
+    ctx.fillStyle = getColor;
+
+    var json = myArr["FaceDetails"][i]["BoundingBox"];
+
+    var ratioX = 0;
+    ratioX = json.Left;
+
+    var ratioY = 0;
+    ratioY = json.Top;
+    var ratioWidth = 0;
+    ratioWidth = json.Width;
+    var ratioHeight = 0;
+    ratioHeight = json.Height;
+
+    ctx.rect(imgWidth * ratioX, imgHeight * ratioY, imgWidth * ratioWidth, imgHeight * ratioHeight);
+    ctx.stroke();
+    ctx.closePath();
+  }
+  document.getElementsByClassName("canvas-photo")[0].style.display = "block";
+  document.getElementsByClassName("main-tab")[0].style.display = "block";
+}
+\end{lstlisting}
+
+\item \textbf{Funkcja odpowiedzialna za ustawienie obrazka}\\ \\
+
+\begin{lstlisting}
+function setBackgroundAndName(file) {
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("post", "upload.php", true);
+  xmlhttp.onreadystatechange = function () {
+    document.getElementById("photo").style.backgroundImage = "url(upload/" + file.name + ")";
+  };
+  var data = new FormData();
+  data.append("file", file);
+  fileWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+  fileNameJSON = "upload/" + fileWithoutExt + ".json";
+  xmlhttp.send(data);
+}
+\end{lstlisting}
+\newpage
+\item \textbf{Funkcje odpowiedzialne za generowanie koloru}\\ \\
+
+\begin{lstlisting}
+function random(min, max) {
+  var num = Math.floor(Math.random() * (max - min)) + min;
+  return num;
+}
+
+function randomColor() {
+  return "rgb(" + random(0, 255) + ", " + random(0, 255) + ", " + random(0, 255) + ")";
+}
+\end{lstlisting}
+
+\item \textbf{Funkcja odpowiedzialna za nasłuchiwanie zmian elementu Input}\\ \\
+
+\begin{lstlisting}
+document.getElementById("file").addEventListener(
+  "change",
+  function () {
+    file = this.files[0];
+    if (file.type.split("/")[0] === "image") {
+      document.getElementsByClassName("functionBox")[0].style.display = "block";
+      document.getElementsByClassName("loader")[0].style.display = "block";
+      document.getElementsByClassName("errorFormatter")[0].style.display = "none";
+      setBackgroundAndName(file);
+      fileName = file.name;
+      getJSON();
+      var _URL = window.URL || window.webkitURL;
+      if ((file = this.files[0])) {
+        img = new Image();
+        img.src = _URL.createObjectURL(file);
+      }
+    } else {
+      document.getElementsByClassName("loader")[0].style.display = "none";
+      document.getElementsByClassName("functionBox")[0].style.display = "block";
+      document.getElementsByClassName("errorFormatter")[0].style.display = "block";
+      document.getElementsByClassName("errorFormatter")[0].style.color = "red";
+      document.getElementsByClassName("errorFormatter")[0].innerHTML = "Not a valid file: " + file.name;
+    }
+  },
+  false
+);
+\end{lstlisting}
+\newpage
+\item \textbf{Funkcja odpowiedzialna za wywołanie pliku Python}\\ \\
+
+\begin{lstlisting}
+<?php
+
+$target_path = "upload/" ;
+if(!file_exists($target_path)) {
+    mkdir($target_path, 0755, true);
+}
+
+$filename = basename($_FILES['file']['name']);
+$tmp_name = $_FILES['file']['tmp_name'];
+$target_path = $target_path . basename( $_FILES['file']['name']);
+
+if(move_uploaded_file($tmp_name, $target_path)) {
+    $procedure = ".aws/start.py ". $filename;
+    exec($procedure);
+} else{
+    echo "There was an error uploading the file, please try again!";
+}
+    exit;
+?>
+\end{lstlisting}
+\newpage
+\item \textbf{Funkcja odpowiedzialna za dynamiczne generowanie tabeli z przetworzonymi danymi}\\ \\
+
+\begin{lstlisting}
+<?php
+$f = fopen("uneditable","a");
+flock($f,LOCK_EX);
+
+$rawdata = file_get_contents("php://input");
+$dataJSON = json_decode($rawdata,true);
+$ok = true;
+
+
+if($dataJSON == null) {
+    $result = array('status' => false, 'code' => 1, 'value' => 'Bad format');
+    $ok = false;
+}
+
+$dataJSON['json']['length'] = $dataJSON['length'];
+
+if($dataJSON['send'] == true){
+	foreach($dataJSON['json']['FaceDetails'] as $chunk) {
+		unset($chunk["Landmarks"],$chunk["Pose"],$chunk["BoundingBox"]);
+	}
+
+	foreach ($dataJSON['json'] as $key => $value) {
+		if($key === "FaceDetails"){
+			$intcols = count($value);
+		}
+	}
+
+	$array = ['AgeRange','Smile','Eyeglasses','Sunglasses','Gender','Beard',
+	'Mustache','EyesOpen','MouthOpen','Confidence'];
+	$arrayEmotions = ['Happy','Calm','Sad','Surprised','Disguisted','Fear','Angry','Confused'];
+
+	echo "<table id='table'>";
+	echo "<td class='headcol'>Name of Attribute</td>";
+	for($j=0;$j<$intcols;$j++) {
+		$id = $j +1;
+		echo "<td class='long' id='colName_".$j."'>Person ".$id."</td>";
+	}
+
+	for ($i = 0;$i<10;$i++) {
+
+		echo "<tr id='".$i."'>";
+		echo "<td class='headcol'>".$array[$i]."</td>";
+
+		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
+			if ($chunk[$array[$i]] == $chunk['AgeRange']){
+				echo "<td class='long'>".$chunk['AgeRange']['Low']."-".$chunk['AgeRange']
+				['High']."</td>";
+			}
+			else if($chunk[$array[$i]] == $chunk['Gender']){
+				if($chunk['Gender']['Value'] == "Male"){
+					echo "<td class='long'>Male in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+				}
+				else {
+					echo "<td class='long'>Female in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+				}
+			}
+			else if($chunk[$array[$i]] == $chunk['Confidence']){
+				echo "<td class='long'>" .round($chunk['Confidence'], 2)."%</td>";
+			}
+			else if($chunk[$array[$i]] != $chunk['AgeRange']){
+				if($chunk[$array[$i]]['Value'] == 1){
+					echo "<td class='long'>Has in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+				}
+				else {
+					echo "<td class='long'>Has not in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+				}
+			}
+		}
+		echo "</tr>";
+	}
+	
+	for ($j = 0;$j<8;$j++) {
+		$rowNumber = $j+10;
+		echo "<tr id='".$rowNumber."' style='display:none;'>";
+		echo "<td class='headcol'>".$arrayEmotions[$j]."</td>";
+	
+		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
+			echo "<td class='long'>".round($chunk['Emotions'][$j]['Confidence'],2)."%</td>";
+		}
+	
+		echo "</tr>";
+	}
+	echo "</table>";
+}
+
+
+	flock($f, LOCK_UN); 
+	fclose($f);
+	unlink('uneditable');
+?>
+\end{lstlisting}
+
+\item \textbf{Skrypt Python odpowiedzialny za komunikację z serwerem AWS}\\ \\
+
+\begin{lstlisting}
+import boto3
+import json
+import sys
+
+reko = boto3.client('rekognition')
+
+pic =  str(sys.argv[1]) 
+
+pic_w_ext = pic[:-4]
+pic_json = "upload/"+pic_w_ext+".json" 
+
+in_file = open("upload/"+pic, "rb") 
+pic_binary = in_file.read()
+in_file.close()
+
+response_binary = reko.detect_faces(
+	Image={
+        'Bytes': pic_binary
+    },
+    Attributes=[
+        'ALL',
+    ]
+)
+
+with open(pic_json, 'w') as f:
+    json.dump(response_binary, f)
+
+\end{lstlisting}
+\end{enumerate}
+\begin{thebibliography}{111}
+\bibitem{awsrekguide}
+    {\it https://docs.aws.amazon.com/rekognition/latest/dg/what$-$is.html}
+    
+    \bibitem{awsrek}
+    {\it https://aws.amazon.com/rekognition/}
+    \bibitem{rekhelpcode}
+    {\it https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Rekognition.html}
+    \bibitem{stack}
+    {\it https://stackoverflow.com}
+\end{thebibliography}
+\end{document}
+
