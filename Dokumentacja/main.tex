@@ -51,6 +51,14 @@ block/.style={
 line/.style={draw}
 }
 
+\lstset{
+basicstyle=\small,
+keywordstyle=\color{black}\bfseries\underbar,
+identifierstyle=,
+stringstyle=\ttfamily, 
+showstringspaces=false,
+basicstyle=\scriptsize}
+
 \begin{document}
 
 \begin{titlepage}
@@ -64,7 +72,6 @@ line/.style={draw}
 			\end{flushleft}
 			\end{minipage}~
 			\begin{minipage}{0.6\textwidth}
-            
 			\begin{flushright} \large
 			\emph{Autorzy:} \\
 			Marta Lewandowska,\\
@@ -73,8 +80,8 @@ line/.style={draw}
 			Wydział Matematyki Stosowanej\\
 			Kierunek Informatyka\\
 			VI semestr - grupa KUTAR3
-		\end{flushright}
-           
+		\end{flushright} \vspace{1.2cm}
+          Gliwice, 2019/2020 
 	\end{minipage}\\[2 cm]
 \end{titlepage}
 
@@ -82,13 +89,30 @@ line/.style={draw}
 \pagebreak
 \renewcommand{\thesection}{\arabic{section}}
 
-\hyphenation{użytkownika wyświetli przeglądarki aplikacji przycisk}
+\hyphenation{użytkownika wyświetli przeglądarki aplikacji przycisk przejrzystego wymagającego efektywną}
 
 \section{Opis programu}
-\hspace{0.5cm}Webowa aplikacja pozwalająca na rozpoznanie twarzy wraz ze szczegółami z podanego przez użytkownika zdjęcia.
+\hspace{0.5cm}Webowa aplikacja pozwalająca na rozpoznanie twarzy wraz ze szczegółami z podanego przez użytkownika zdjęcia. Aplikacja wykorzystuje usługę AWS Amazon Rekognition.
 
 \vspace*{0.3cm}
 \hspace{0.5cm}Program został wykonany w celu projektu zaliczeniowego z przedmiotu Projektowanie rozwiązań chmurowych z wykorzystaniem Amazon Web Services.
+\vspace*{0.5cm}
+\section{Cel i geneza projektu}
+\hspace{0.5cm}Celem projektu było stworzenie prostej aplikacji webowej, w której można znajdować i analizować osoby na zdjęciu podanym przez użytkownika wykorzystując usługę AWS Rekognition.
+\vspace*{0.5cm}
+\section{Zespół projektowy}
+\begin{enumerate}
+    \item \textbf{Marta Lewandowska}\\
+    Rola: Grafik \\
+    Zadania: Frontend, tworzenie filmów, tworzenie prezentacji  \\
+    \item \textbf{Krystian Barczak}\\
+    Rola: Programista\\
+    Zadania: Backend, tworzenie filmów, tworzenie prezentacji\\
+    \item \textbf{Aleksander Boronowski }\\
+    Rola: Tester\\
+    Zadania: Tester, bugmenadżer, tworzenie dokumentacji, tworzenie filmów, tworzenie prezentacji\\
+\end{enumerate}
+\newpage
 \section{Instrukcja obsługi}
 \begin{enumerate}
     \item \textbf{Upload własnego zdjęcia}\\\\
@@ -295,7 +319,8 @@ document.getElementById("file").addEventListener(
       document.getElementsByClassName("functionBox")[0].style.display = "block";
       document.getElementsByClassName("errorFormatter")[0].style.display = "block";
       document.getElementsByClassName("errorFormatter")[0].style.color = "red";
-      document.getElementsByClassName("errorFormatter")[0].innerHTML = "Not a valid file: " + file.name;
+      document.getElementsByClassName("errorFormatter")[0].innerHTML = 
+      "Not a valid file: " + file.name;
     }
   },
   false
@@ -374,15 +399,18 @@ if($dataJSON['send'] == true){
 
 		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
 			if ($chunk[$array[$i]] == $chunk['AgeRange']){
-				echo "<td class='long'>".$chunk['AgeRange']['Low']."-".$chunk['AgeRange']
+				echo "<td class='long'>".$chunk['AgeRange']
+				['Low']."-".$chunk['AgeRange']
 				['High']."</td>";
 			}
 			else if($chunk[$array[$i]] == $chunk['Gender']){
 				if($chunk['Gender']['Value'] == "Male"){
-					echo "<td class='long'>Male in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+					echo "<td class='long'>Male in ".round($chunk['Gender']
+					['Confidence'],2)."%</td>";
 				}
 				else {
-					echo "<td class='long'>Female in ".round($chunk['Gender']['Confidence'],2)."%</td>";
+					echo "<td class='long'>Female in ".round($chunk['Gender']
+					['Confidence'],2)."%</td>";
 				}
 			}
 			else if($chunk[$array[$i]] == $chunk['Confidence']){
@@ -390,10 +418,12 @@ if($dataJSON['send'] == true){
 			}
 			else if($chunk[$array[$i]] != $chunk['AgeRange']){
 				if($chunk[$array[$i]]['Value'] == 1){
-					echo "<td class='long'>Has in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+					echo "<td class='long'>Has in ".round($chunk[$array[$i]]
+					['Confidence'],2)."%</td>";
 				}
 				else {
-					echo "<td class='long'>Has not in ".round($chunk[$array[$i]]['Confidence'],2)."%</td>";
+					echo "<td class='long'>Has not in ".round($chunk[$array[$i]]
+					['Confidence'],2)."%</td>";
 				}
 			}
 		}
@@ -406,7 +436,8 @@ if($dataJSON['send'] == true){
 		echo "<td class='headcol'>".$arrayEmotions[$j]."</td>";
 	
 		foreach($dataJSON['json']['FaceDetails'] as $chunk) {
-			echo "<td class='long'>".round($chunk['Emotions'][$j]['Confidence'],2)."%</td>";
+			echo "<td class='long'>".round($chunk['Emotions'][$j]
+			['Confidence'],2)."%</td>";
 		}
 	
 		echo "</tr>";
@@ -452,6 +483,34 @@ with open(pic_json, 'w') as f:
     json.dump(response_binary, f)
 
 \end{lstlisting}
+\end{enumerate}
+\newpage
+\section{Oczekiwane rezultaty projektu}
+\hspace{0.5cm}Oczekiwanym rezultatem projektu było stworzenie kompletnego, w pełni działającego projektu zarówno w wersji webowej jak i mobilnej. Dodatkowo oczekiwane było stworzenie łatwego i przejrzystego interfejsu graficznego, a także prostota w obsłudze aplikacji przez użytkownika. Jednym z najważniejszych rezultatów było poprawne skonfigurowanie usługi AWS Rekognition w taki sposób aby uzyskiwać dane odpowiednie dla założeń naszej aplikacji.
+\vspace*{0.5cm}
+\section{Realizacja projektu}
+\begin{enumerate}
+    \item Przegląd usług Amazon;
+\item Przedyskutowanie wyboru usługi;
+\item Wybór Amazon Rekognition;
+\item Przegląd dokumentacji usługi;
+\item Implementacja połączenia między aplikacją a usługą;
+\item Implementacja serwera zarządzającego odpowiedzią;
+\item Implementacja wyglądu aplikacji;
+\item Testowanie rozwiązań;
+\item Naprawianie błędów wynikających z testowania;
+\item Stworzenie filmu prezentującego działanie;
+\item Stworzenie dokumentacji projektowej.
+\end{enumerate}
+\newpage
+\section{Wnioski}
+\begin{enumerate}
+    \item \textbf{Spostrzeżenia}\\
+    Początkowo projekt sprawiał wrażenie mocno rozbudowanego, skomplikowanego oraz\\ wymagającego dużej implementacji. Ostatecznie ta myśl okazała się błędna co skutkowało dość miłą i efektywną pracą całego zespołu.\\
+    \item \textbf{Osiągnięcia}\\
+    Stworzenie w pełni działającej aplikacji według postanowionych warunków i celów.\\
+    \item \textbf{Potencjał rozwoju}\\
+Aplikacja nie wykorzystuje całego zasobu usługi ze względu na jej wielkość. W przyszłości możliwe jest rozbudowanie aplikacji o kolejne elementy usługi Amazon Rekognition jakim jest np. rozpoznawanie celebrytów ze zdjęć.
 \end{enumerate}
 \begin{thebibliography}{111}
 \bibitem{awsrekguide}
